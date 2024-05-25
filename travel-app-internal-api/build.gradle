@@ -1,0 +1,8 @@
+description('travel-app-internal-api')
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':travel-yaml-importer')
+    implementation project(':travel-system-core')
+    implementation project(':travel-domain-rds')
+    implementation project(':travel-domain-redis')
+}

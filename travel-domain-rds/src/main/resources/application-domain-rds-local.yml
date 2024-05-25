@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: local
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: domain-rds
+  main-datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://localhost:3306/travel?useSSL=false
+    username: root
+    password: 1234
+  member-datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://localhost:3306/travel-member?useSSL=false
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    generate-ddl: true
+    open-in-view: false
+    properties:
+      hibernate:
+        ejb:
+          use_class_enhancer: false
+        envers:
+          track_entities_changed_in_revision: true
+          audit_table_suffix: _history
+          revision_field_name: revision_id
+          revision_type_field_name: revision_type
+          store_data_at_delete: true
+          modified_flag_suffix: _changed
+        format_sql: true
+        show_sql: true
+        hbm2ddl:
+          auto: update
+logging:
+  level:
+    org.hibernate.sql: debug

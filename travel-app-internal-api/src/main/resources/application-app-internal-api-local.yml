@@ -1,0 +1,9 @@
+server:
+  port: 8123
+spring:
+  application:
+    name: travel-app-internal-api
+travel:
+  app:
+    base-url: "http://localhost:8123"
+

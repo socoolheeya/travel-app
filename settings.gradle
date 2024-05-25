@@ -1,0 +1,7 @@
+rootProject.name = 'travel-app'
+include 'travel-app-internal-api'
+include 'travel-system-core'
+include 'travel-domain-rds'
+include 'travel-domain-redis'
+include 'travel-event-publisher'
+include 'travel-yaml-importer'
