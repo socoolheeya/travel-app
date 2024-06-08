@@ -1,7 +1,7 @@
 package com.socoolheeya.travel.domain.rds.main.property.domain;
 
 import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyImageEntity;
-import com.socoolheeya.travel.domain.rds.main.property.enums.PropertyEnums;
+import com.socoolheeya.travel.system.core.enums.PropertyEnums;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

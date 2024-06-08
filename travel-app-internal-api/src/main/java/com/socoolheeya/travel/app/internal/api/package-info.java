@@ -1,1 +1,0 @@
-package com.socoolheeya.travel.app.internal.api;

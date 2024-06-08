@@ -1,4 +1,4 @@
-package com.socoolheeya.travel.domain.rds.main.property.service;
+package com.socoolheeya.travel.domain.rds.main.property.service.query;
 
 import com.socoolheeya.travel.domain.rds.main.property.repository.PropertyHistoryJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PropertyHistoryJpaService {
+public class PropertyHistoryQueryService {
     private final PropertyHistoryJpaRepository propertyHistoryJpaRepository;
 
     public void getLastChangeRevision(Long id) {
-        propertyHistoryJpaRepository.findLastChangeRevision(id)
+        propertyHistoryJpaRepository.findById(id)
                 .ifPresent(revision -> log.info(String.valueOf(revision)));
     }
 }

@@ -17,15 +17,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Comment;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Entity
-@Audited(withModifiedFlag = true)
 @AllArgsConstructor
 @Table(name = "property")
 @Comment("시설 정보")
@@ -47,29 +44,23 @@ public class PropertyEntity extends BaseEntity {
     @Column(columnDefinition = "bool comment '사용 여부'")
     Boolean isEnabled = true;
 
-    @NotAudited
     @OneToMany(mappedBy = "property")
     List<PropertyImageEntity> images = new ArrayList<>();
 
-    @NotAudited
     @OneToOne(mappedBy = "property")
     PropertyAddressEntity address;
 
-    @NotAudited
     @OneToOne(mappedBy = "property")
     PropertyContactEntity contact;
 
-    @NotAudited
     @OneToOne(mappedBy = "property")
     PropertyLocationEntity location;
 
-    @NotAudited
     @OneToMany(mappedBy = "property", orphanRemoval = true)
     List<PropertyContractEntity> propertyContracts = new ArrayList<>();
 
-    @NotAudited
-    @OneToMany(mappedBy = "property", orphanRemoval = true)
-    List<PropertySupplierEntity> propertySuppliers = new ArrayList<>();
+    @OneToOne(mappedBy = "property", orphanRemoval = true)
+    PropertySupplierEntity propertySupplier;
 
     public PropertyEntity(Long id, String koName, String enName, Boolean isEnabled) {
         this.id = id;

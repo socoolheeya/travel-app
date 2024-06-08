@@ -1,12 +1,8 @@
-package com.socoolheeya.travel.domain.rds.main.room.entity;
+package com.socoolheeya.travel.domain.rds.main.rate.entity;
 
-
-import com.socoolheeya.travel.system.core.enums.RoomEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -16,29 +12,38 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+
 @Getter
 @Entity
-@Builder
+@Table(name = "extra_rate")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Table(name = "room_amenity")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomAmenityEntity {
+public class ExtraRateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_amenity_id", columnDefinition = "int(6) comment '객실 어메니티 ID'")
-    Integer id;
+    @Column(name = "additional_rate_id", columnDefinition = "bigint comment '추가요금 ID'")
+    Long id;
 
-    @Enumerated(EnumType.STRING)
-    RoomEnums.Amenity amenity;
+    String name;
+
+    BigDecimal adultPrice;
+
+    BigDecimal childPrice;
+
+    int excessAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    RoomEntity room;
+    @JoinColumn(name = "rate_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    RateEntity rateEntity;
+
+
+
+
+
+
 }

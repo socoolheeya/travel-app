@@ -1,6 +1,6 @@
 package com.socoolheeya.travel.domain.rds.main.room.entity;
 
-import com.socoolheeya.travel.domain.rds.main.room.enums.RoomEnums;
+import com.socoolheeya.travel.system.core.enums.RoomEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;

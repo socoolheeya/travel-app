@@ -3,7 +3,7 @@ package com.socoolheeya.travel.domain.rds.main.supplier.entity;
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
 import com.socoolheeya.travel.domain.rds.main.property.entity.PropertySupplierEntity;
 import com.socoolheeya.travel.domain.rds.main.supplier.domain.Supplier;
-import com.socoolheeya.travel.domain.rds.main.supplier.enums.SupplierEnums;
+import com.socoolheeya.travel.system.core.enums.SupplierEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,7 +19,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +54,8 @@ public class SupplierEntity extends BaseEntity {
     @OneToOne(mappedBy = "supplier")
     SupplierOperationOptionEntity supplierOperationOption;
 
-    @OneToMany(mappedBy = "supplier")
-    List<PropertySupplierEntity> propertySuppliers = new ArrayList<>();
+    @OneToOne(mappedBy = "supplier")
+    PropertySupplierEntity propertySupplier;
 
     public Supplier toDomain() {
         return Supplier.builder()

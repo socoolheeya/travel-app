@@ -3,7 +3,7 @@ package com.socoolheeya.travel.domain.rds.main.room.entity;
 
 
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
-import com.socoolheeya.travel.domain.rds.main.room.enums.RoomEnums;
+import com.socoolheeya.travel.system.core.enums.RoomEnums;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

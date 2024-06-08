@@ -1,4 +1,4 @@
-package com.socoolheeya.travel.domain.rds.main.property.enums;
+package com.socoolheeya.travel.system.core.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;

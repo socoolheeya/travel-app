@@ -1,15 +1,12 @@
-package com.socoolheeya.travel.domain.rds.main.property.service;
+package com.socoolheeya.travel.domain.rds.main.property.service.query;
 
 import com.socoolheeya.travel.domain.rds.main.property.domain.Property;
 import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyEntity;
 import com.socoolheeya.travel.domain.rds.main.property.repository.PropertyJpaRepository;
-import com.socoolheeya.travel.domain.rds.main.supplier.enums.SupplierEnums;
-import com.socoolheeya.travel.system.core.enums.CommonSupplierEnums;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +15,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PropertyJpaService {
+public class PropertyQueryService {
 
     private final PropertyJpaRepository propertyJpaRepository;
+
     public Property searchPropertyById(Long propertyId) {
         Optional<PropertyEntity> optional = propertyJpaRepository.findById(propertyId);
         if(optional.isEmpty()) {
@@ -42,11 +40,5 @@ public class PropertyJpaService {
                 .map(PropertyEntity::toDomain)
                 .collect(Collectors.toList());
     }
-
-    @Transactional
-    public PropertyEntity registerProperty(PropertyEntity entity) throws DataAccessException {
-        return propertyJpaRepository.save(entity);
-    }
-
 
 }

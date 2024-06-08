@@ -1,4 +1,4 @@
-package com.socoolheeya.travel.app.internal.api.core.property.adapter;
+package com.socoolheeya.travel.app.internal.api.core.property.controller;
 
 import com.socoolheeya.travel.app.internal.api.core.property.domain.http.PropertyRequest;
 import com.socoolheeya.travel.app.internal.api.core.property.domain.http.PropertyResponse;

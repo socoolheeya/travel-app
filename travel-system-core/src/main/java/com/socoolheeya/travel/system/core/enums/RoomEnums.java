@@ -1,4 +1,4 @@
-package com.socoolheeya.travel.domain.rds.main.room.enums;
+package com.socoolheeya.travel.system.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

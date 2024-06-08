@@ -2,7 +2,7 @@ package com.socoolheeya.travel.domain.rds.main.property.entity;
 
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
 import com.socoolheeya.travel.domain.rds.main.property.domain.PropertyImage;
-import com.socoolheeya.travel.domain.rds.main.property.enums.PropertyEnums;
+import com.socoolheeya.travel.system.core.enums.PropertyEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;

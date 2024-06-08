@@ -20,6 +20,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 @Getter
@@ -36,11 +37,17 @@ public class RateEntity {
     @Column(name = "total_price", columnDefinition = "decimal(15,4) comment '총 금액'")
     BigDecimal totalPrice;
 
+    @Column(name = "net_price", columnDefinition = "decimal(15,4) comment '네트 금액'")
+    BigDecimal netPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rate_plan_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     RatePlanEntity ratePlan;
 
     @OneToMany(mappedBy = "rate")
     List<DailyRateEntity> dailyRates = new ArrayList<>();
+
+    @OneToMany(mappedBy = "rate")
+    List<ExtraRateEntity> extraRates = new ArrayList<>();
 
 }

@@ -1,6 +1,6 @@
 package com.socoolheeya.travel.domain.rds.main.rateplan.entity;
 
-import com.socoolheeya.travel.domain.rds.main.rateplan.enums.RatePlanEnums;
+import com.socoolheeya.travel.system.core.enums.RatePlanEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
