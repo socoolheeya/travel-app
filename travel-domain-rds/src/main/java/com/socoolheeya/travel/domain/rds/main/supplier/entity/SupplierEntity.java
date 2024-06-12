@@ -16,6 +16,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -57,12 +58,20 @@ public class SupplierEntity extends BaseEntity {
     @OneToOne(mappedBy = "supplier")
     PropertySupplierEntity propertySupplier;
 
-    public Supplier toDomain() {
-        return Supplier.builder()
-                .supplierId(id)
-                .shortName(shortName)
-                .name(name)
-                .build();
+    @Builder
+    public SupplierEntity(Long id, String shortName, String name, SupplierEnums.Type type, Boolean isEnabled, SupplierOperationOptionEntity supplierOperationOption, PropertySupplierEntity propertySupplier) {
+        this.id = id;
+        this.shortName = shortName;
+        this.name = name;
+        this.type = type;
+        this.isEnabled = isEnabled;
+        this.supplierOperationOption = supplierOperationOption;
+        this.propertySupplier = propertySupplier;
+    }
+
+    @Builder
+    public SupplierEntity(Long id, String shortName, String name, SupplierEnums.Type type, Boolean isEnabled) {
+        this(id, shortName, name, type, isEnabled, null, null);
     }
 
 }

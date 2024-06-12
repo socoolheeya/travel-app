@@ -11,6 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -44,7 +45,19 @@ public class SupplierOperationOptionEntity {
     @JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     SupplierEntity supplier;
 
+    @Builder
+    public SupplierOperationOptionEntity(Long id, boolean isBatch, LocalDateTime shutdownStartedAt, LocalDateTime  shutdownEndedAt, SupplierEntity supplier) {
+        this.id = id;
+        this.isBatch = isBatch;
+        this.shutdownStartedAt = shutdownStartedAt;
+        this.shutdownEndedAt = shutdownEndedAt;
+        this.supplier = supplier;
+    }
 
+    @Builder
+    public SupplierOperationOptionEntity(Long id, boolean isBatch, LocalDateTime shutdownStartedAt, LocalDateTime  shutdownEndedAt) {
+        this(id, isBatch, shutdownStartedAt, shutdownEndedAt, null);
+    }
 
 
 }

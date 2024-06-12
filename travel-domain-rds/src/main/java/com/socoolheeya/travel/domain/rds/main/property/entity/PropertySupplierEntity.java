@@ -15,6 +15,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -43,4 +44,11 @@ public class PropertySupplierEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     SupplierEntity supplier;
+
+    @Builder
+    public PropertySupplierEntity(Long id, PropertyEntity property, SupplierEntity supplier) {
+        this.id = id;
+        this.property = property;
+        this.supplier = supplier;
+    }
 }

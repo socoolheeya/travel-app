@@ -11,6 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,9 +19,9 @@ import org.hibernate.annotations.Comment;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "property_contact")
 @Comment("숙소 연락 정보")
+@Table(name = "property_contact")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PropertyContactEntity {
 
@@ -44,6 +45,26 @@ public class PropertyContactEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     PropertyEntity property;
+
+    @Builder
+    public PropertyContactEntity(Long id, String email, String telephone, String secondTelephone, String website, PropertyEntity property) {
+        this.id = id;
+        this.email = email;
+        this.telephone = telephone;
+        this.secondTelephone = secondTelephone;
+        this.website = website;
+        this.property = property;
+    }
+
+    @Builder
+    public PropertyContactEntity(Long id, String email, String telephone, String secondTelephone, String website) {
+        this.id = id;
+        this.email = email;
+        this.telephone = telephone;
+        this.secondTelephone = secondTelephone;
+        this.website = website;
+        this.property = null;
+    }
 
 
 

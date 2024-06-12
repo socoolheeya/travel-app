@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,7 +23,6 @@ import java.util.List;
 
 @Getter
 @Entity
-@AllArgsConstructor
 @Table(name = "property")
 @Comment("시설 정보")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -61,11 +61,17 @@ public class PropertyEntity extends BaseEntity {
     @OneToOne(mappedBy = "property", orphanRemoval = true)
     PropertySupplierEntity propertySupplier;
 
-    public PropertyEntity(Long id, String koName, String enName, Boolean isEnabled) {
+    @Builder
+    public PropertyEntity(Long id, String koName, String enName, Boolean isEnabled, List<PropertyImageEntity> images, PropertyAddressEntity address, PropertyContactEntity contact, PropertyLocationEntity location) {
         this.id = id;
         this.koName = koName;
         this.enName = enName;
         this.isEnabled = isEnabled;
+        this.images = images;
+        this.address = address;
+        this.contact = contact;
+        this.location = location;
+
     }
 
 }

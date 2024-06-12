@@ -1,24 +1,21 @@
 package com.socoolheeya.travel.domain.rds.main.supplier.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.FieldDefaults;
+import com.socoolheeya.travel.domain.rds.main.property.domain.PropertySupplier;
+import com.socoolheeya.travel.system.core.enums.SupplierEnums;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Supplier {
-    Long supplierId;
+public record Supplier(
+        Long id,
+        String shortName,
+        String name,
+        SupplierEnums.Type type,
+        Boolean isEnabled,
+        SupplierOperationOption supplierOperationOption,
+        PropertySupplier propertySupplier
+) {
 
-    String shortName;
-
-    String name;
+    public Supplier {
+        type = SupplierEnums.Type.DC;
+        isEnabled = true;
+    }
 
 }

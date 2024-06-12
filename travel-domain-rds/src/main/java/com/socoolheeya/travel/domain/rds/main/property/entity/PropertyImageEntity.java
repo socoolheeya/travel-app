@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,10 +26,9 @@ import org.hibernate.annotations.Comment;
 
 @Getter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "property_image")
 @Comment("숙소 이미지")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PropertyImageEntity extends BaseEntity {
     @Id
@@ -56,5 +55,20 @@ public class PropertyImageEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     PropertyEntity property;
+
+    @Builder
+    public PropertyImageEntity(Long id, String name, String path, Integer sequence, PropertyEnums.ImageType type, PropertyEntity property) {
+        this.id = id;
+        this.name = name;
+        this.path = path;
+        this.sequence = sequence;
+        this.type = type;
+        this.property = property;
+    }
+
+    @Builder
+    public PropertyImageEntity(Long id, String name, String path, Integer sequence, PropertyEnums.ImageType type) {
+        this(id, name, path, sequence, type, null);
+    }
 
 }

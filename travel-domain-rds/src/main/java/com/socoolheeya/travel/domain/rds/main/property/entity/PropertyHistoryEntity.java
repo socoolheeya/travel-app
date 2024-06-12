@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -39,5 +40,12 @@ public class PropertyHistoryEntity extends BaseEntity {
     @Column(columnDefinition = "bool comment '사용 여부'")
     Boolean isEnabled = true;
 
-
+    @Builder
+    public PropertyHistoryEntity(Long id, Long propertyId, String koName, String enName, Boolean isEnabled) {
+        this.id = id;
+        this.propertyId = propertyId;
+        this.koName = koName;
+        this.enName = enName;
+        this.isEnabled = isEnabled;
+    }
 }

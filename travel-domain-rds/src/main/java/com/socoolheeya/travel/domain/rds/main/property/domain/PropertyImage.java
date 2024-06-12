@@ -7,8 +7,7 @@ public record PropertyImage(
         String name,
         PropertyEnums.ImageType type,
         String path,
-        Integer sequence,
-        Property property
+        Integer sequence
 ) {
     public PropertyImage {
         sequence = 1;

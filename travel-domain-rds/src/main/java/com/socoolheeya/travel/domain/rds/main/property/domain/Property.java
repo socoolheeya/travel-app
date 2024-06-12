@@ -17,9 +17,9 @@ public record Property(
         String koName,
         String enName,
         Boolean isEnabled,
-        List<PropertyImageEntity> images,
-        PropertyAddressEntity address,
-        PropertyContactEntity contact,
+        List<PropertyImage> images,
+        PropertyAddress address,
+        PropertyContact contact,
         PropertyLocationEntity location,
         List<PropertyContractEntity> propertyContracts,
         PropertySupplierEntity propertySupplier

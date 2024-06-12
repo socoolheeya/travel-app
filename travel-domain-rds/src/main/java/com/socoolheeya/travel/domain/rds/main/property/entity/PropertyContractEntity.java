@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -42,4 +43,22 @@ public class PropertyContractEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     PropertyEntity property;
+
+    @Builder
+    public PropertyContractEntity(@NotNull Long id, @NotNull String filePath, String fileName, Boolean isEnabled, PropertyEntity property) {
+        this.id = id;
+        this.filePath = filePath;
+        this.fileName = fileName;
+        this.isEnabled = isEnabled;
+        this.property = property;
+    }
+
+    @Builder
+    public PropertyContractEntity(Long id, String filePath, String fileName, Boolean isEnabled) {
+        this.id = id;
+        this.filePath = filePath;
+        this.fileName = fileName;
+        this.isEnabled = isEnabled;
+        this.property = null;
+    }
 }

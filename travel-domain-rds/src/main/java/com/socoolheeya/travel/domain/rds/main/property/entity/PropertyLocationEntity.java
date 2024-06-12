@@ -11,7 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,10 +19,9 @@ import org.hibernate.annotations.Comment;
 
 @Getter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "property_location")
 @Comment("시설 위치 정보")
+@Table(name = "property_location")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PropertyLocationEntity {
 
@@ -46,4 +45,19 @@ public class PropertyLocationEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     PropertyEntity property;
+
+    @Builder
+    public PropertyLocationEntity(Long id, String country, String region, String city, PropertyMapInformationEntity mapInformation, PropertyEntity property) {
+        this.id = id;
+        this.country = country;
+        this.region = region;
+        this.city = city;
+        this.mapInformation = mapInformation;
+        this.property = property;
+    }
+
+    @Builder
+    public PropertyLocationEntity(Long id, String country, String region, String city) {
+        this(id, country, region, city, null, null);
+    }
 }
