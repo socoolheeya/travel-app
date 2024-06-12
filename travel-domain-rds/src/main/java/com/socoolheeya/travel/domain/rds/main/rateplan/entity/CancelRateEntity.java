@@ -12,8 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
@@ -37,4 +39,20 @@ public class CancelRateEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cancel_policy_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     CancelPolicyEntity cancelPolicy;
+
+    @Builder
+    public CancelRateEntity(Long id, Integer offset, Integer rate, CancelPolicyEntity cancelPolicy) {
+        this.id = id;
+        this.offset = offset;
+        this.rate = rate;
+        this.cancelPolicy = cancelPolicy;
+    }
+
+    @Builder
+    public CancelRateEntity(Long id, Integer offset, Integer rate) {
+        this.id = id;
+        this.offset = offset;
+        this.rate = rate;
+        this.cancelPolicy = null;
+    }
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -42,4 +43,29 @@ public class BookingBasicInformationEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     BookingEntity booking;
+
+    @Builder
+    public BookingBasicInformationEntity(Long id, LocalDate checkin, LocalDate checkout, Integer nights, BookingEntity booking) {
+        this.id = id;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.nights = nights;
+        this.booking = booking;
+    }
+
+    @Builder
+    public BookingBasicInformationEntity(Long id, LocalDate checkin, LocalDate checkout, Integer nights) {
+        this.id = id;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.nights = nights;
+        this.booking = null;
+    }
+
+    @Builder
+    public BookingBasicInformationEntity(BookingEntity booking) {
+        this.booking = booking;
+    }
+
+
 }

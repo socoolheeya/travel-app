@@ -28,10 +28,12 @@ public class BookingChildPlanEntity {
     @Column(name = "child_plan_id", columnDefinition = "bigint comment '어린이 플랜 ID'")
     Long id;
 
+    @Column(name = "name", columnDefinition = "varchar(255) comment '어린이 플랜명'")
     String name;
 
     @NotNull
-    Long age;
+    @Column(name = "age", columnDefinition = "smallint comment '나이'")
+    Integer age;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "occupancy_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))

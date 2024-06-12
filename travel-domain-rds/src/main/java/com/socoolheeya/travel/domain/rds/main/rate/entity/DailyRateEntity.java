@@ -11,9 +11,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.aspectj.runtime.internal.cflowstack.ThreadStackImpl11;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -53,4 +55,30 @@ public class DailyRateEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rate_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     RateEntity rate;
+
+    @Builder
+    public DailyRateEntity(Long id, LocalDate salesDay, BigDecimal originPrice, BigDecimal sellingPrice, BigDecimal depositPrice, BigDecimal commission, BigDecimal commissionFee, RateEntity rate) {
+        this.id = id;
+        this.salesDay = salesDay;
+        this.originPrice = originPrice;
+        this.sellingPrice = sellingPrice;
+        this.depositPrice = depositPrice;
+        this.commission = commission;
+        this.commissionFee = commissionFee;
+        this.rate = rate;
+    }
+
+    @Builder
+    public DailyRateEntity(Long id, LocalDate salesDay, BigDecimal originPrice, BigDecimal sellingPrice, BigDecimal depositPrice, BigDecimal commission, BigDecimal commissionFee) {
+        this.id = id;
+        this.salesDay = salesDay;
+        this.originPrice = originPrice;
+        this.sellingPrice = sellingPrice;
+        this.depositPrice = depositPrice;
+        this.commission = commission;
+        this.commissionFee = commissionFee;
+        this.rate = null;
+    }
+
+
 }

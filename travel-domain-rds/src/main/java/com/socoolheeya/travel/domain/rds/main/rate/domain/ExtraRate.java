@@ -1,15 +1,14 @@
 package com.socoolheeya.travel.domain.rds.main.rate.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import java.math.BigDecimal;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExtraRate {
-    Long id;
-
+public record ExtraRate(
+        Long id,
+        String name,
+        BigDecimal adultPrice,
+        BigDecimal childPrice,
+        BigDecimal excessAmount,
+        Rate rate
+) {
 
 }

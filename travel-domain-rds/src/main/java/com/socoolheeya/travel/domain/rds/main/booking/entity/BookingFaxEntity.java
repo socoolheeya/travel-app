@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -39,4 +40,18 @@ public class BookingFaxEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     BookingEntity booking;
+
+    @Builder
+    public BookingFaxEntity(Long id, BookingEnums.FaxStatus status, BookingEntity booking) {
+        this.id = id;
+        this.status = status;
+        this.booking = booking;
+    }
+
+    @Builder
+    public BookingFaxEntity(BookingEnums.FaxStatus status) {
+        this.id = null;
+        this.status = status;
+        this.booking = null;
+    }
 }

@@ -1,12 +1,13 @@
 package com.socoolheeya.travel.domain.rds.main.property.domain;
 
+import com.socoolheeya.travel.domain.rds.main.supplier.domain.Supplier;
 import lombok.Builder;
 
 @Builder
 public record PropertySupplier(
-        Long propertySupplierId,
-        Long propertyId,
-        Long supplierId
+        Long id,
+        Property property,
+        Supplier supplier
 ) {
 
 }

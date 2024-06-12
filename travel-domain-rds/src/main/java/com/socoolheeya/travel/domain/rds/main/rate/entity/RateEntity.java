@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -49,5 +50,15 @@ public class RateEntity {
 
     @OneToMany(mappedBy = "rate")
     List<ExtraRateEntity> extraRates = new ArrayList<>();
+
+    @Builder
+    public RateEntity(Long id, BigDecimal totalPrice, BigDecimal netPrice, RatePlanEntity ratePlan) {
+        this.id = id;
+        this.totalPrice = totalPrice;
+        this.netPrice = netPrice;
+        this.ratePlan = ratePlan;
+        this.dailyRates = new ArrayList<>();
+        this.extraRates = new ArrayList<>();
+    }
 
 }

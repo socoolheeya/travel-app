@@ -19,6 +19,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -93,6 +94,16 @@ public class RatePlanEntity extends BaseEntity {
 
     @OneToOne(mappedBy = "ratePlan")
     BookingEntity booking;
+
+    @Builder
+    public RatePlanEntity(Long id, String name, RatePlanEnums.RateClassification rateClassification, LocalTime checkinTime, LocalTime checkoutTime) {
+        this.id = id;
+        this.name = name;
+        this.rateClassification = rateClassification;
+        this.checkinTime = checkinTime;
+        this.checkoutTime = checkoutTime;
+
+    }
 
 
 }

@@ -25,7 +25,8 @@ public class PropertyAdapter implements LoadPropertyPort {
 
     @Override
     public List<Property> loadBySearchConditions(PropertyRequest.Search request) {
-        return propertyJpaService.searchPropertiesByIsEnabled(request.getIsEnabled());
+        return null;
+        //return propertyJpaService.searchPropertiesByIsEnabled(request.getIsEnabled());
         //supplierJpaService.searchSupplierByConditions(request.getSupplier());
     }
 }

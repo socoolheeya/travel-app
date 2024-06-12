@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -48,12 +49,31 @@ public class BookingGuestEntity {
 
     @ColumnDefault("0")
     @Column(columnDefinition = "bool comment '대표 예약자 여부'")
-    boolean isLeadBooker = false;
+    Boolean isMainHolder = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_occupancy_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     BookingOccupancyEntity bookingOccupancy;
 
+    @Builder
+    public BookingGuestEntity(Long id, String name, Integer age, String phone, BookingEnums.Gender gender, Boolean isMainHolder, BookingOccupancyEntity bookingOccupancy) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.phone = phone;
+        this.gender = gender;
+        this.isMainHolder = isMainHolder;
+        this.bookingOccupancy = bookingOccupancy;
+    }
 
-
+    @Builder
+    public BookingGuestEntity(Long id, String name, Integer age, String phone, BookingEnums.Gender gender, Boolean isMainHolder) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.phone = phone;
+        this.gender = gender;
+        this.isMainHolder = isMainHolder;
+        this.bookingOccupancy = null;
+    }
 }

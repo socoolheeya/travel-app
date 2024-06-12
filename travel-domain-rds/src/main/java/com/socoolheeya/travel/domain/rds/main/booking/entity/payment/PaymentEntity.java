@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +18,6 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Entity
-@Builder
-@AllArgsConstructor
 @Table(name = "payment")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -37,5 +34,18 @@ public class PaymentEntity {
     @OneToOne(mappedBy = "payment")
     BookingEntity booking;
 
+    @Builder
+    public PaymentEntity(Long id, BookingEnums.PaymentType paymentType, BookingEntity booking) {
+        this.id = id;
+        this.paymentType = paymentType;
+        this.booking = booking;
+    }
+
+    @Builder
+    public PaymentEntity(BookingEnums.PaymentType paymentType, BookingEntity booking) {
+        this.id = null;
+        this.booking = booking;
+        this.paymentType = paymentType;
+    }
 
 }

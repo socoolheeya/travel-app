@@ -1,7 +1,6 @@
 package com.socoolheeya.travel.domain.rds.main.property.entity;
 
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
-import com.socoolheeya.travel.domain.rds.main.property.domain.Property;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,13 +66,6 @@ public class PropertyEntity extends BaseEntity {
         this.koName = koName;
         this.enName = enName;
         this.isEnabled = isEnabled;
-    }
-
-    public Property toDomain() {
-        return Property.builder()
-                .koName(this.koName)
-                .enName(this.enName)
-                .build();
     }
 
 }

@@ -34,6 +34,11 @@ class PropertyRepositoryTest {
     void insertTest() {
         PropertyEntity propertyEntity = new PropertyEntity(null, "테스트 숙소", "Test Property", true);
         propertyJpaRepository.save(propertyEntity);
+//        for(int i = 0 ; i < 1000; i++) {
+//            PropertyEntity propertyEntity = new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, true);
+//            propertyJpaRepository.save(propertyEntity);
+//        }
+
     }
 
 

@@ -29,12 +29,4 @@ class RateQueryServiceTest {
     @Autowired
     private RateJpaRepository rateJpaRepository;
 
-    @Autowired
-    private RateMapper rateMapper;
-
-    @Test
-    public void test() {
-        rateQueryService.findByRatePlanId(1L);
-    }
-
 }

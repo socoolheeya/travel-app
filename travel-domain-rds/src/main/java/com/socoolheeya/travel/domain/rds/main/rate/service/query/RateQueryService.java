@@ -19,12 +19,12 @@ public class RateQueryService {
     private final RateJpaRepository rateJpaRepository;
     private final RateMapper rateMapper;
 
-    public Optional<List<Rate>> findByRatePlanId(Long ratePlanId) {
-        return rateJpaRepository.findByRatePlanId(ratePlanId)
-                .map(rateEntities -> rateEntities
-                        .stream()
-                        .map(rateMapper::toDomain)
-                        .collect(Collectors.toList())
-                );
-    }
+//    public Optional<List<Rate>> findByRatePlanId(Long ratePlanId) {
+//        return rateJpaRepository.findByRatePlanId(ratePlanId)
+//                .map(rateEntities -> rateEntities
+//                        .stream()
+//                        .map(rateMapper::toDomain)
+//                        .collect(Collectors.toList())
+//                );
+//    }
 }

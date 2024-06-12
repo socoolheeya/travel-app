@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,5 +34,19 @@ public class RoomServiceEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     RoomEntity room;
+
+    @Builder
+    public RoomServiceEntity(Integer id, RoomEnums.Service service) {
+        this.id = id;
+        this.service = service;
+        this.room = null;
+    }
+
+    @Builder
+    public RoomServiceEntity(RoomEnums.Service service) {
+        this.id = null;
+        this.service = service;
+        this.room = null;
+    }
 
 }

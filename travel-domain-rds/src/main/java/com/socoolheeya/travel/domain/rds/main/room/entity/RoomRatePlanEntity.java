@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -64,5 +65,21 @@ public class RoomRatePlanEntity implements Persistable<RoomRatePlanId> {
     @Override
     public boolean isNew() {
         return createdAt == null;
+    }
+
+    @Builder
+    public RoomRatePlanEntity (Boolean isEnabled, RoomEntity room, RatePlanEntity ratePlan) {
+        this.id = null;
+        this.isEnabled = isEnabled;
+        this.room = room;
+        this.ratePlan = ratePlan;
+    }
+
+    @Builder
+    public RoomRatePlanEntity(RoomRatePlanId id, Boolean isEnabled) {
+        this.id = id;
+        this.isEnabled = isEnabled;
+        this.room = null;
+        this.ratePlan = null;
     }
 }

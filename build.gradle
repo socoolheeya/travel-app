@@ -2,8 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.4'
-//    id 'org.jooq.jooq-codegen-gradle' version '3.19.8'
-    id 'nu.studer.jooq' version '8.2.3'
 }
 
 allprojects {
@@ -55,15 +53,10 @@ project(':travel-app-internal-api') {
     }
 }
 
-project(':travel-system-core') {
-    bootJar { enabled = false }
-    jar { enabled = true }
-}
-
 project(':travel-domain-rds') {
     dependencies {
         compileOnly project(':travel-yaml-importer')
-        compileOnly project(':travel-system-core')
+        api project(':travel-system-core')
     }
     bootJar { enabled = false }
     jar { enabled = true }
@@ -79,6 +72,11 @@ project(':travel-domain-redis') {
 }
 
 project(':travel-event-publisher') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+}
+
+project(':travel-system-core') {
     bootJar { enabled = false }
     jar { enabled = true }
 }

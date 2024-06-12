@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Entity
-@AllArgsConstructor
 @Table(name = "voucher")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -47,6 +47,26 @@ public class VoucherEntity {
 
     @OneToOne(mappedBy = "voucher")
     BookingEntity booking;
+
+    @Builder
+    public VoucherEntity(Long id, Integer numberOfRoom, Integer adult, Integer children, RoomEnums.RoomType roomType, BookingEntity booking) {
+        this.id = id;
+        this.numberOfRoom = numberOfRoom;
+        this.adult = adult;
+        this.children = children;
+        this.roomType = roomType;
+        this.booking = booking;
+    }
+
+    @Builder
+    public VoucherEntity(Long id, Integer numberOfRoom, Integer adult, Integer children, RoomEnums.RoomType roomType) {
+        this.id = id;
+        this.numberOfRoom = numberOfRoom;
+        this.adult = adult;
+        this.children = children;
+        this.roomType = roomType;
+        this.booking = null;
+    }
 
 
 }

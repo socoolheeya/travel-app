@@ -13,9 +13,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Bag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,4 +46,20 @@ public class BookingOccupancyEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     BookingEntity booking;
+
+    @Builder
+    public BookingOccupancyEntity(Long id, Integer totalAdults, Integer totalChildren, BookingEntity booking) {
+        this.id = id;
+        this.totalAdults = totalAdults;
+        this.totalChildren = totalChildren;
+        this.booking = booking;
+    }
+
+    @Builder
+    public BookingOccupancyEntity(Long id, Integer totalAdults, Integer totalChildren) {
+        this.id = id;
+        this.totalAdults = totalAdults;
+        this.totalChildren = totalChildren;
+        this.booking = null;
+    }
 }

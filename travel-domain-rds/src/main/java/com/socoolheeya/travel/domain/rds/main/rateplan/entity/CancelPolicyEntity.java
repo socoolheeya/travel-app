@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -44,4 +45,22 @@ public class CancelPolicyEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rate_plan_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     RatePlanEntity ratePlan;
+
+    @Builder
+    public CancelPolicyEntity(Long id, Boolean isCancel, String description, List<CancelRateEntity> cancelRates, RatePlanEntity ratePlan) {
+        this.id = id;
+        this.isCancel = isCancel;
+        this.description = description;
+        this.cancelRates = cancelRates;
+        this.ratePlan = ratePlan;
+    }
+
+    @Builder
+    public CancelPolicyEntity(Long id, Boolean isCancel, String description) {
+        this.id = id;
+        this.isCancel = isCancel;
+        this.description = description;
+        this.cancelRates = new ArrayList<>();
+        this.ratePlan = null;
+    }
 }

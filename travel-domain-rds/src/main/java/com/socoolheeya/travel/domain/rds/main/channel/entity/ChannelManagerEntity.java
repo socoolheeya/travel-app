@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -41,4 +42,18 @@ public class ChannelManagerEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     ChannelEntity channel;
+
+    @Builder
+    public ChannelManagerEntity(Long id, String password, String accountKey, Boolean isEnabled, ChannelEntity channel) {
+        this.id = id;
+        this.password = password;
+        this.accountKey = accountKey;
+        this.isEnabled = isEnabled;
+        this.channel = channel;
+    }
+
+    @Builder
+    public ChannelManagerEntity(Long id, String password, String accountKey, Boolean isEnabled) {
+        this(id, password, accountKey, isEnabled, null);
+    }
 }

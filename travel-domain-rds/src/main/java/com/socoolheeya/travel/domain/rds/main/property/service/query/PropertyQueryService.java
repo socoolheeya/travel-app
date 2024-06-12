@@ -22,10 +22,10 @@ public class PropertyQueryService {
     public Property searchPropertyById(Long propertyId) {
         Optional<PropertyEntity> optional = propertyJpaRepository.findById(propertyId);
         if(optional.isEmpty()) {
-           return new Property( null, null, false, null);
+           return null;
         }
 
-        return optional.get().toDomain();
+        return null;
     }
 
     /**
@@ -34,11 +34,12 @@ public class PropertyQueryService {
      * @return 숙소 목록
      */
     public List<Property> searchPropertiesByIsEnabled(Boolean isEnabled) {
-        return propertyJpaRepository.findAll()
-                .stream()
-                .filter(x -> x.getIsEnabled().equals(isEnabled))
-                .map(PropertyEntity::toDomain)
-                .collect(Collectors.toList());
+        return null;
+//        return propertyJpaRepository.findAll()
+//                .stream()
+//                .filter(x -> x.getIsEnabled().equals(isEnabled))
+//                .map(PropertyEntity::toDomain)
+//                .collect(Collectors.toList());
     }
 
 }

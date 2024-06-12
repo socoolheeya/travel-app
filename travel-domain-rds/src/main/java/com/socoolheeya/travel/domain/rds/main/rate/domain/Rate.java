@@ -1,30 +1,26 @@
 package com.socoolheeya.travel.domain.rds.main.rate.domain;
 
-import com.socoolheeya.travel.domain.rds.main.rate.entity.ExtraRateEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import com.socoolheeya.travel.domain.rds.main.rateplan.domain.RatePlan;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Rate {
+public record Rate(
+        Long id,
+        BigDecimal totalPrice,
+        BigDecimal netPrice,
+        RatePlan ratePlan,
+        List<ExtraRate> extraRates,
+        List<DailyRate> dailyRates
+) {
+    public Rate {
+        extraRates = new ArrayList<>();
+        dailyRates = new ArrayList<>();
+    }
 
-    Long id;
 
-    Long ratePlanId;
 
-    BigDecimal totalPrice;
-
-    BigDecimal netPrice;
-
-    List<ExtraRate> extraRates;
-
-    List<DailyRate> dailyRates;
 
 
 

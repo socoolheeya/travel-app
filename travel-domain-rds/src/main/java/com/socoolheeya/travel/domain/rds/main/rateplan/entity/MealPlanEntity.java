@@ -11,6 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -39,4 +40,22 @@ public class MealPlanEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rate_plan_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     RatePlanEntity ratePlan;
+
+    @Builder
+    public MealPlanEntity(Long id, Boolean isBreakfast, Boolean isLunch, Boolean isDinner) {
+        this.id = id;
+        this.isBreakfast = isBreakfast;
+        this.isLunch = isLunch;
+        this.isDinner = isDinner;
+        this.ratePlan = null;
+    }
+
+    @Builder
+    public MealPlanEntity(Long id) {
+        this.id = id;
+        this.isBreakfast = false;
+        this.isLunch = false;
+        this.isDinner = false;
+        this.ratePlan = null;
+    }
 }

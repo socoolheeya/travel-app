@@ -1,7 +1,6 @@
 package com.socoolheeya.travel.domain.rds.main.property.entity;
 
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
-import com.socoolheeya.travel.domain.rds.main.property.domain.PropertyImage;
 import com.socoolheeya.travel.system.core.enums.PropertyEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -57,15 +56,5 @@ public class PropertyImageEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     PropertyEntity property;
-
-    public PropertyImage toDomain() {
-        return PropertyImage.builder()
-                .id(id)
-                .name(name)
-                .type(type)
-                .path(path)
-                .sequence(sequence)
-                .build();
-    }
 
 }

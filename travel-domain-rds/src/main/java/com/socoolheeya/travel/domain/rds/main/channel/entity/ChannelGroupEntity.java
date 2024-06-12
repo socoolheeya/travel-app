@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -30,4 +31,10 @@ public class ChannelGroupEntity {
 
     @OneToMany(mappedBy = "channelGroup")
     List<ChannelEntity> channels = new ArrayList<>();
+
+    @Builder
+    public ChannelGroupEntity(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
