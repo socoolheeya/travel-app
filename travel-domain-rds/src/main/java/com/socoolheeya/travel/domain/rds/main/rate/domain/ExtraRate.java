@@ -8,7 +8,7 @@ public record ExtraRate(
         BigDecimal adultPrice,
         BigDecimal childPrice,
         BigDecimal excessAmount,
-        Rate rate
+        Long rateId
 ) {
 
 }

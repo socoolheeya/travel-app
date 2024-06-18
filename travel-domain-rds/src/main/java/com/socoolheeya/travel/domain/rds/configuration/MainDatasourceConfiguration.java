@@ -1,47 +1,46 @@
 package com.socoolheeya.travel.domain.rds.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @Configuration
 @EnableConfigurationProperties
-@RequiredArgsConstructor
 @EnableJpaRepositories(basePackages = {"com.socoolheeya.travel.domain.rds.main", "com.socoolheeya.travel.domain.rds.common"},
         entityManagerFactoryRef = "mainEntityManagerFactory",
         transactionManagerRef = "mainTransactionManager")
 public class MainDatasourceConfiguration {
 
+    @Bean
+    @ConfigurationProperties("spring.main-datasource")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
 
     @Primary
     @Bean(name = "mainDataSource")
-    @ConfigurationProperties(prefix = "spring.main-datasource")
+    @ConfigurationProperties(prefix = "spring.main-datasource.hikari")
     public DataSource mainDataSource() {
-        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+        return dataSourceProperties()
+                .initializeDataSourceBuilder()
+                .build();
     }
 
     @Primary
@@ -68,9 +67,9 @@ public class MainDatasourceConfiguration {
     @Primary
     @Bean(name = "mainTransactionManager")
     public PlatformTransactionManager mainTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(mainEntityManagerFactory().getObject());
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(mainEntityManagerFactory().getObject());
 
-        return transactionManager;
+        return jpaTransactionManager;
     }
 }

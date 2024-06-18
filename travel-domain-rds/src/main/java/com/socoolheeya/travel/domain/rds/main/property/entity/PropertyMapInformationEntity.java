@@ -29,6 +29,15 @@ public class PropertyMapInformationEntity extends CoordinateEntity {
     @Column(name = "property_id", columnDefinition = "bigint comment '숙소 위치정보 ID'")
     Long id;
 
+    @Column(name = "longitude", columnDefinition = "double comment '숙소 위치정보 ID'")
+    Double longitude;
+
+    @Column(name = "latitude", columnDefinition = "double comment '숙소 위치정보 ID'")
+    Double latitude;
+
+    @Column(name = "point", columnDefinition = "point comment '숙소 위치정보 ID'")
+    Point point;
+
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))

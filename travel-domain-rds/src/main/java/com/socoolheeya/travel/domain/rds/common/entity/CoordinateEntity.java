@@ -20,6 +20,7 @@ public abstract class CoordinateEntity {
 
     @Column(columnDefinition = "varbinary(255) comment '좌표'")
     Point point;
+
     public void setPoint(Double longitude, Double latitude) {
         this.point = new Point(longitude, latitude);
     }

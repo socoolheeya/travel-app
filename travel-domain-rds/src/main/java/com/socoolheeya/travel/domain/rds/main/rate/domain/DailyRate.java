@@ -11,7 +11,7 @@ public record DailyRate(
         BigDecimal depositPrice,
         BigDecimal commission,
         BigDecimal commissionFee,
-        Rate rate
+        Long rateId
 ) {
 
 }

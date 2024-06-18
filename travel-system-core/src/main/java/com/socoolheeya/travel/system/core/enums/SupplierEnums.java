@@ -11,4 +11,5 @@ public class SupplierEnums {
     public enum Type {
         DC, CMS, PMS
     }
+
 }

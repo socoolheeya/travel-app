@@ -6,7 +6,6 @@ import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyContractEn
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE
-        , uses = {})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PropertyContractMapper extends BaseEntityMapper<PropertyContract, PropertyContractEntity> {
 }

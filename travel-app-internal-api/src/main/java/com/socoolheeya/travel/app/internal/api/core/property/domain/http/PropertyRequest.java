@@ -1,5 +1,6 @@
 package com.socoolheeya.travel.app.internal.api.core.property.domain.http;
 
+import com.socoolheeya.travel.domain.rds.main.property.domain.Property;
 import com.socoolheeya.travel.system.core.enums.CommonSupplierEnums;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class PropertyRequest {
     @AllArgsConstructor
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class Search {
+
         String name;
 
         @Builder.Default
@@ -30,6 +32,39 @@ public class PropertyRequest {
 
         @Builder.Default
         Boolean canBookSameDay = false;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Register {
+        Property property;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Modify {
+        Long id;
+        String koName;
+        String enName;
+        Boolean isEnabled;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Remove {
+        Long propertyId;
     }
 
 }

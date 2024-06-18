@@ -79,6 +79,4 @@ public class DailyRateEntity {
         this.commissionFee = commissionFee;
         this.rate = null;
     }
-
-
 }

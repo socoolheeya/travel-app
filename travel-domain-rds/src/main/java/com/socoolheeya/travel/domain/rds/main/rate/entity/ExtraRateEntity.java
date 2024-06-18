@@ -65,10 +65,4 @@ public class ExtraRateEntity {
         this.excessAmount = excessAmount;
         this.rate = null;
     }
-
-
-
-
-
-
 }

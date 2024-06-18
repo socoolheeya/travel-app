@@ -3,6 +3,7 @@ package com.socoolheeya.travel.domain.rds.configuration;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -31,16 +32,17 @@ public class MemberDatasourceConfiguration {
     private final Environment environment;
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.member-datasource")
+    @ConfigurationProperties("spring.member-datasource")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.member-datasource.hikari")
     public DataSource memberDataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setUrl(environment.getProperty("spring.member-datasource.jdbc-url"));
-//        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("spring.member-datasource.driver-class-name")));
-//        dataSource.setUsername(environment.getProperty("spring.member-datasource.username"));
-//        dataSource.setPassword(environment.getProperty("spring.member-datasource.password"));
-//
-//        return dataSource;
-        return DataSourceBuilder.create().build();
+        return dataSourceProperties()
+                .initializeDataSourceBuilder()
+                .build();
     }
 
     @Bean

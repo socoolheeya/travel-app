@@ -10,10 +10,9 @@ import com.socoolheeya.travel.system.core.model.exception.TravelServerErrorExcep
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.server.handler.ResponseStatusExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseStatusExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(TravelPropertyException.class)
     public ResponseEntity<TravelError> travelPropertyException(TravelPropertyException e) {
@@ -45,7 +44,7 @@ public class GlobalExceptionHandler extends ResponseStatusExceptionHandler {
                 .body(e.toTravelError());
     }
 
-    @ExceptionHandler(TravelBadRequestException.class)
+    @ExceptionHandler(TravelServerErrorException.class)
     public ResponseEntity<TravelError> travelServerErrorException(TravelServerErrorException e) {
         return ResponseEntity.status(e.getStatus())
                 .body(e.toTravelError());

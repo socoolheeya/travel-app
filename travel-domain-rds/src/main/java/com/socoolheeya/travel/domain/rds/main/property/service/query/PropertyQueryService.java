@@ -1,10 +1,13 @@
 package com.socoolheeya.travel.domain.rds.main.property.service.query;
 
 import com.socoolheeya.travel.domain.rds.main.property.domain.Property;
-import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyEntity;
+import com.socoolheeya.travel.domain.rds.main.property.mapper.PropertyMapper;
 import com.socoolheeya.travel.domain.rds.main.property.repository.PropertyJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +22,20 @@ public class PropertyQueryService {
 
     private final PropertyJpaRepository propertyJpaRepository;
 
-    public Property searchPropertyById(Long propertyId) {
-        Optional<PropertyEntity> optional = propertyJpaRepository.findById(propertyId);
-        if(optional.isEmpty()) {
-           return null;
-        }
+    /**
+     *
+     * @param propertyId 숙소 ID
+     * @return
+     */
+    public Optional<Property> searchPropertyById(Long propertyId) {
+        return propertyJpaRepository.findById(propertyId)
+                .map(PropertyMapper.INSTANCE::toDomain);
+    }
 
-        return null;
+    public Page<Property> searchProperties(int pageNo, int pageSize, Sort sort) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        return propertyJpaRepository.findAll(pageable)
+                .map(PropertyMapper.INSTANCE::toDomain);
     }
 
     /**
@@ -34,12 +44,11 @@ public class PropertyQueryService {
      * @return 숙소 목록
      */
     public List<Property> searchPropertiesByIsEnabled(Boolean isEnabled) {
-        return null;
-//        return propertyJpaRepository.findAll()
-//                .stream()
-//                .filter(x -> x.getIsEnabled().equals(isEnabled))
-//                .map(PropertyEntity::toDomain)
-//                .collect(Collectors.toList());
+        return propertyJpaRepository.findAll()
+                .stream()
+                .filter(x -> x.getIsEnabled().equals(isEnabled))
+                .map(PropertyMapper.INSTANCE::toDomain)
+                .collect(Collectors.toList());
     }
 
 }

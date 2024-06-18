@@ -1,7 +1,7 @@
 package com.socoolheeya.travel.domain.rds.main.property.domain;
 
 
-import java.awt.Point;
+import org.springframework.data.geo.Point;
 
 public record PropertyMapInformation(
         Long id,

@@ -28,7 +28,7 @@ public enum CommonSupplierEnums {
     ONDA(14, "OD", "ONDA"),
     HOTEL_STORY(14, "HS", "Hotel Story"),
     HOTEL_STORY_DISTRIBUTOR(15, "HD", "Derby"),
-    NONE(0, null, "None");
+    UNKNOWN(0, null, "Unknown");
 
     private final Integer code;
     private final String shortName;

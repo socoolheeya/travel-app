@@ -7,7 +7,6 @@ import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyImageEntit
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE
-        , uses = {})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PropertyImageMapper extends BaseEntityMapper<PropertyImage, PropertyImageEntity> {
 }

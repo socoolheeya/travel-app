@@ -45,8 +45,8 @@ public class BookingEntity extends BaseEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "varchar(20) comment '예약 상태'")
-    BookingEnums.Status status = BookingEnums.Status.REQUESTED;
+    @Column(name = "booking_status", columnDefinition = "varchar(20) comment '예약 상태'")
+    BookingEnums.Status bookingStatus = BookingEnums.Status.REQUESTED;
 
     @Column(name = "ref_booking_no", columnDefinition = "varchar(500) comment 'CMS 예약 번호'")
     String refBookingNo;
@@ -67,14 +67,23 @@ public class BookingEntity extends BaseEntity {
     List<BookingOccupancyEntity> bookingOccupancies = new ArrayList<>();
 
     @Builder
-    public BookingEntity(Long id, BookingEnums.Status status, RatePlanEntity ratePlan, VoucherEntity voucher, PaymentEntity payment, List<BookingOccupancyEntity> bookingOccupancies) {
-        super();
+    public BookingEntity(Long id, BookingEnums.Status bookingStatus, String refBookingNo) {
         this.id = id;
-        this.status = status;
+        this.bookingStatus = bookingStatus;
+        this.refBookingNo = refBookingNo;
+        this.ratePlan = null;
+        this.voucher = null;
+        this.payment = null;
+    }
+
+    @Builder
+    public BookingEntity(Long id, BookingEnums.Status bookingStatus, String refBookingNo, RatePlanEntity ratePlan, VoucherEntity voucher, PaymentEntity payment) {
+        this.id = id;
+        this.bookingStatus = bookingStatus;
+        this.refBookingNo = refBookingNo;
         this.ratePlan = ratePlan;
         this.voucher = voucher;
         this.payment = payment;
-        this.bookingOccupancies = bookingOccupancies;
     }
 
 

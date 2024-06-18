@@ -13,7 +13,7 @@ public record RatePlanCoupon(
         Integer value,
         LocalDateTime startedAt,
         LocalDateTime endedAt,
-        RatePlan ratePlan
+        Long ratePlanId
 ) {
 
 }

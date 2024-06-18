@@ -24,7 +24,6 @@ public class PropertyResponse {
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class Search {
         Property property;
-
     }
 
     @Getter
@@ -35,6 +34,34 @@ public class PropertyResponse {
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class SearchByConditions {
         List<Property> properties;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Register {
+        Property property;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Modify {
+        Property property;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    public static class Remove {
 
     }
 }

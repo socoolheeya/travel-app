@@ -1,7 +1,9 @@
 package com.socoolheeya.travel.domain.rds.main.property.entity;
 
+import com.socoolheeya.travel.domain.rds.common.converter.BooleanToStringConverter;
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +13,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,10 +38,18 @@ public class PropertyEntity extends BaseEntity {
     @Column(columnDefinition = "varchar(500) comment '시설명(KR)'")
     String koName;
 
+    @NotNull
     @Column(columnDefinition = "varchar(500) comment '시설명(EN)'")
     String enName;
 
-    @Column(columnDefinition = "bool comment '사용 여부'")
+    @Column(columnDefinition = "text comment '시설 설명(KR)'")
+    String koDescription;
+
+    @Column(columnDefinition = "text comment '시설 설명(EN)'")
+    String enDescription;
+
+    @Convert(converter = BooleanToStringConverter.class)
+    @Column(columnDefinition = "char(1) comment '사용 여부'")
     Boolean isEnabled = true;
 
     @OneToMany(mappedBy = "property")
@@ -71,7 +80,20 @@ public class PropertyEntity extends BaseEntity {
         this.address = address;
         this.contact = contact;
         this.location = location;
+    }
 
+    @Builder
+    public PropertyEntity(Long id, String koName, String enName, String koDescription, String enDescription, Boolean isEnabled) {
+        this.id = id;
+        this.koName = koName;
+        this.enName = enName;
+        this.koDescription = koDescription;
+        this.enDescription = enDescription;
+        this.isEnabled = isEnabled;
+        this.images = null;
+        this.address = null;
+        this.contact = null;
+        this.location = null;
     }
 
 }

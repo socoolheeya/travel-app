@@ -7,7 +7,7 @@ import java.util.List;
 
 public record Booking(
         Long id,
-        BookingEnums.Status status,
+        BookingEnums.Status bookingStatus,
         String refBookingNo,
         Long ratePlanId,
         Long voucherId,
@@ -16,7 +16,7 @@ public record Booking(
 ) {
 
     public Booking {
-        status = BookingEnums.Status.REQUESTED;
+        bookingStatus = BookingEnums.Status.REQUESTED;
         bookingOccupancies = new ArrayList<>();
     }
 }

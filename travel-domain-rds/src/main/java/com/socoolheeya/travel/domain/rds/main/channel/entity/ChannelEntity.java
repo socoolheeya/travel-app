@@ -1,7 +1,9 @@
 package com.socoolheeya.travel.domain.rds.main.channel.entity;
 
+import com.socoolheeya.travel.domain.rds.common.converter.BooleanToStringConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -37,7 +39,8 @@ public class ChannelEntity {
     BigDecimal commission = BigDecimal.ZERO;
 
     @NotNull
-    @Column(columnDefinition = "bool comment '사용 여부'")
+    @Convert(converter = BooleanToStringConverter.class)
+    @Column(columnDefinition = "char(1) comment '사용 여부'")
     Boolean isEnabled = true;
 
     @ManyToOne(fetch = FetchType.LAZY)

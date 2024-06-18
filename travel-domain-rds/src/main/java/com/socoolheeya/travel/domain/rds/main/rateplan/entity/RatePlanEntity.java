@@ -4,6 +4,7 @@ package com.socoolheeya.travel.domain.rds.main.rateplan.entity;
 import com.socoolheeya.travel.domain.rds.common.entity.BaseEntity;
 import com.socoolheeya.travel.domain.rds.main.booking.entity.BookingEntity;
 import com.socoolheeya.travel.domain.rds.main.rate.entity.RateEntity;
+import com.socoolheeya.travel.domain.rds.main.rateplan.domain.RatePlan;
 import com.socoolheeya.travel.system.core.enums.RatePlanEnums;
 import com.socoolheeya.travel.domain.rds.main.room.entity.RoomRatePlanEntity;
 import jakarta.persistence.CascadeType;
@@ -102,7 +103,24 @@ public class RatePlanEntity extends BaseEntity {
         this.rateClassification = rateClassification;
         this.checkinTime = checkinTime;
         this.checkoutTime = checkoutTime;
+    }
 
+    @Builder
+    public RatePlanEntity(Long id, String name, LocalTime checkinTime, LocalTime checkoutTime, RatePlanEnums.RateClassification rateClassification, boolean isEarlyCheckin, boolean isSmoking, boolean isStaticRate, Integer minStay, Integer maxStay, RatePlanEnums.Status status) {
+        this.id = id;
+        this.name = name;
+        this.checkinTime = checkinTime;
+        this.checkoutTime = checkoutTime;
+        this.rateClassification = rateClassification;
+        this.isEarlyCheckin = isEarlyCheckin;
+        this.isSmoking = isSmoking;
+        this.isStaticRate = isStaticRate;
+        this.minStay = minStay;
+        this.maxStay = maxStay;
+        this.status = status;
+        this.cancelPolicy = null;
+        this.mealPlan = null;
+        this.booking = null;
     }
 
 
