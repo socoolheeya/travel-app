@@ -27,6 +27,8 @@ subprojects {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'io.micrometer:micrometer-registry-prometheus'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -46,11 +48,13 @@ subprojects {
 project(':travel-app-internal-api') {
     dependencies {
         compileOnly project(':travel-yaml-importer')
-        compileOnly project(':travel-system-core')
+        api project(':travel-system-core')
         compileOnly project(':travel-domain-rds')
-        compileOnly project(':travel-domain-redis')
+        //compileOnly project(':travel-domain-redis')
         compileOnly project(':travel-event-publisher')
     }
+    bootJar { enabled = true }
+    jar { enabled = true }
 }
 
 project(':travel-domain-rds') {
@@ -65,7 +69,7 @@ project(':travel-domain-rds') {
 project(':travel-domain-redis') {
     dependencies {
         compileOnly project(':travel-yaml-importer')
-        compileOnly project(':travel-system-core')
+        api project(':travel-system-core')
     }
     bootJar { enabled = false }
     jar { enabled = true }

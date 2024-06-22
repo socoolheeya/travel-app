@@ -4,6 +4,7 @@ import com.socoolheeya.travel.domain.rds.configuration.MainDatasourceConfigurati
 import com.socoolheeya.travel.domain.rds.main.property.entity.PropertyEntity;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @DataJpaTest
@@ -48,15 +49,14 @@ class PropertyRepositoryTest {
     @Transactional
     @Rollback(false)
     void saveAllTest() {
-        List<PropertyEntity> propertyEntities = new ArrayList<>();
-        for(int i = 0 ; i < 1000000; i++) {
-            propertyEntities.add(new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true));
-        }
         StopWatch watch = new StopWatch();
         watch.start();
-        propertyJpaRepository.saveAll(propertyEntities);
+        IntStream.range(0, 1000)
+                .mapToObj(i -> new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), propertyJpaRepository::saveAll));
+
         watch.stop();
-        System.out.println(watch.getTotalTimeMillis());
+        System.out.println("saveAllTest execution time:" + watch.getTotalTimeMillis());
     }
 
     @Test
@@ -65,38 +65,32 @@ class PropertyRepositoryTest {
     void saveForTest() {
         StopWatch watch = new StopWatch();
         watch.start();
-        for(int i = 0 ; i < 1000000; i++) {
-            PropertyEntity entity = new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true);
-            propertyJpaRepository.save(entity);
-        }
+        IntStream.range(0, 1000)
+                .mapToObj(i -> new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true))
+                .forEach(propertyJpaRepository::save);
         watch.stop();
-        System.out.println(watch.getTotalTimeMillis());
+        System.out.println("saveForTest execution time: " + watch.getTotalTimeMillis());
     }
 
     @Test
+    @Timeout(5)
     @Transactional
     @Rollback(false)
-    public void syncSaveTest() throws ExecutionException, InterruptedException {
-        List<PropertyEntity> propertyEntities = new ArrayList<>();
-        for(int i = 0 ; i < 1000000; i++) {
-            propertyEntities.add(new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true));
-        }
+    void syncSaveTest() {
+        List<PropertyEntity> propertyEntities = IntStream.range(0, 1000)
+                .mapToObj(i -> new PropertyEntity(null, "테스트 숙소_" + i, "Test Property_" + i, "숙소 설명_" + i, "Test Property Description_" + i, true))
+                .toList();
 
-        ForkJoinPool forkJoinPool = new ForkJoinPool(10);
-        StopWatch watch = new StopWatch();
-        watch.start();
-        forkJoinPool.submit(() -> propertyEntities.parallelStream()
-                .forEach(entity -> {
-                    propertyJpaRepository.save(entity);
-                })
-        ).get();
-        watch.stop();
-        System.out.println(watch.getTotalTimeMillis());
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        CompletableFuture.allOf(propertyEntities.parallelStream()
+                        .map(entity -> CompletableFuture.runAsync(() -> propertyJpaRepository.save(entity)))
+                        .toArray(CompletableFuture[]::new))
+                .join();
+
+        stopWatch.stop();
+        System.out.println("syncSaveTest execution time: " + stopWatch.getTotalTimeMillis());
     }
-
-
-
-
-
 
 }

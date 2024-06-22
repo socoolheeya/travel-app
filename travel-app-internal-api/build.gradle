@@ -1,8 +1,10 @@
 description('travel-app-internal-api')
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation project(':travel-yaml-importer')
     implementation project(':travel-system-core')
     implementation project(':travel-domain-rds')
-    implementation project(':travel-domain-redis')
+    //implementation project(':travel-domain-redis')
 }
