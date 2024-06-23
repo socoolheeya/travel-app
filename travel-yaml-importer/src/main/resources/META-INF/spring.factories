@@ -1,2 +1,0 @@
-org.springframework.boot.env.EnvironmentPostProcessor=\
-  com.socoolheeya.travel.yaml.importer.YamlEnvironmentPostProcessor
