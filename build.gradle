@@ -47,11 +47,11 @@ subprojects {
 
 project(':travel-app-internal-api') {
     dependencies {
-        compileOnly project(':travel-yaml-importer')
-        api project(':travel-system-core')
-        compileOnly project(':travel-domain-rds')
+        implementation project(':travel-yaml-importer')
+        implementation project(':travel-system-core')
+        api project(':travel-domain-rds')
         //compileOnly project(':travel-domain-redis')
-        compileOnly project(':travel-event-publisher')
+        implementation project(':travel-event-publisher')
     }
     bootJar { enabled = true }
     jar { enabled = true }
