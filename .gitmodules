@@ -1,3 +1,6 @@
 [submodule "travel-domain-rds"]
 	path = travel-domain-rds
 	url = https://github.com/socoolheeya/travel-domain-rds.git
+[submodule "travel-app-internal-api"]
+	path = travel-app-internal-api
+	url = https://github.com/socoolheeya/travel-app-internal-api.git
