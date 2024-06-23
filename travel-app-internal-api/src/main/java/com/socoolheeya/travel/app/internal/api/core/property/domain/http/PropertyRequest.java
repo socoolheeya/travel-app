@@ -11,6 +11,9 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.UtilityClass;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @UtilityClass
 public class PropertyRequest {
 
@@ -21,11 +24,11 @@ public class PropertyRequest {
     @AllArgsConstructor
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class Search {
+        String language;
 
         String name;
 
-        @Builder.Default
-        CommonSupplierEnums supplier = CommonSupplierEnums.TAVI;
+        Set<CommonSupplierEnums> suppliers;
 
         @Builder.Default
         Boolean isEnabled = true;

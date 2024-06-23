@@ -5,6 +5,7 @@ import com.socoolheeya.travel.app.internal.api.core.property.domain.http.Propert
 import com.socoolheeya.travel.app.internal.api.core.property.service.PropertyService;
 import com.socoolheeya.travel.domain.rds.main.property.domain.Property;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,10 +35,10 @@ public class PropertyController {
     }
 
     @GetMapping("")
-    public ResponseEntity<PropertyResponse.SearchByConditions> searchByConditions(@ModelAttribute PropertyRequest.Search request) {
+    public ResponseEntity<PropertyResponse.SearchByConditions> searchByConditions(@ModelAttribute PropertyRequest.Search request, Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(PropertyResponse.SearchByConditions.builder()
-                        .properties(propertyService.searchByConditions(request))
+                        .properties(propertyService.searchByConditions(request, pageable))
                         .build());
     }
 
