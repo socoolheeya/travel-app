@@ -7,3 +7,6 @@
 [submodule "travel-system-core"]
 	path = travel-system-core
 	url = https://github.com/socoolheeya/travel-system-core.git
+[submodule "travel-yaml-importer"]
+	path = travel-yaml-importer
+	url = https://github.com/socoolheeya/travel-yaml-importer.git
