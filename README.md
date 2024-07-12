@@ -34,3 +34,32 @@ rm -rf .git/modules/<path_to_submodule>
 git commit -m "Remove submodule"
 ```
 
+##### FQA
+트랙킹이 끊어져서 서브모듈이 동기화가 되지 않았을 때
+```bash
+Entering 'travel-domain-rds'
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> main
+
+fatal: run_command returned non-zero status for travel-domain-rds
+```
+
+```bash
+
+# 원격 브랜치 목록 확인
+git branch -r
+
+# 로컬 브랜치를 원격 브랜치와 연결
+git branch --set-upstream-to=origin/main
+
+# 원격 브랜치와 병합
+git pull
+
+```
